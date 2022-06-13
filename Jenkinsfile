@@ -8,8 +8,8 @@ pipeline {
                 // git branch: 'main', url: 'https://github.com/mpa19/hello-springrest.git'
 
                 // Run Gradle a Unix agent.
-                yarn:
                 yarn 'build'
+                rimraf dist
             }
         }
 
