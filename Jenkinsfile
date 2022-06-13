@@ -4,9 +4,8 @@ node{
     stages {
         stage('Build') {
             steps {
-                script{
-                  app = docker.build("my-apache2")
-                }
+                yarn 'install'
+                yarn 'build'
             }
         }
 
