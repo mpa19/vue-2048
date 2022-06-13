@@ -4,8 +4,8 @@ pipeline{
     stages {
         stage('Build') {
             steps {
-                yarn 'install'
-                yarn 'build'
+                sh "docker-compose build"
+                sh "docker-compose up"
             }
         }
 
