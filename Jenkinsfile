@@ -9,7 +9,6 @@ pipeline {
 
                 // Run Gradle a Unix agent.
                 yarn 'build'
-                rimraf dist
             }
         }
 
