@@ -5,7 +5,6 @@
   "author": "chang_su <pengfoo@126.com>",
   "private": true,
   "scripts": {
-    "rimraf": "./node_modules/rimraf/bin.js",
     "clean": "rimraf dist",
     "dev": "vite",
     "build": "yarn clean && vite build"

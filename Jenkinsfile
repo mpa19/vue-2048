@@ -4,13 +4,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // Get some code from a GitHub repository
-                // git branch: 'main', url: 'https://github.com/mpa19/hello-springrest.git'
-
-                // Run Gradle a Unix agent.
-                yarn 'build'
+                script{
+                  app = docker.build("my-apache2")
+                }
             }
         }
+
+
 
         stage('Publish'){
            steps {
