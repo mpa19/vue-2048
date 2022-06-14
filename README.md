@@ -23,3 +23,14 @@ yarn dev
 yarn build
 ```
 
+### Build the app with docker
+
+```bash
+docker-compose build
+```
+
+### Run the app with docker
+
+```bash
+docker-compose up
+```
