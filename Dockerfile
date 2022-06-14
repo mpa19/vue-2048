@@ -1,7 +1,8 @@
 FROM node AS builder
 WORKDIR /vue
-COPY . ./
+COPY package.json yarn.lock ./
 RUN yarn
+COPY ./ ./
 RUN yarn build
 
 FROM httpd

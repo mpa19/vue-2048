@@ -1,0 +1,7 @@
+*
+!src/
+!public/
+!index.html
+!postcss.config.js
+!package.json
+!yarn.lock
