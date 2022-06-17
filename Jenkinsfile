@@ -9,7 +9,6 @@ pipeline{
 
     stages {
 
-        stages {
             stage('Trivy') {
                 parallel(
                        stage('Test image') {
@@ -34,7 +33,7 @@ pipeline{
                        }
                     )
                 }
-        }
+        
 
         stage('Build') {
             steps {
