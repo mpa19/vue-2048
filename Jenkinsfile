@@ -8,9 +8,17 @@ pipeline{
     }
 
     stages {
+
         stage('Build') {
             steps {
                 sh "docker-compose build"
+            }
+        }
+
+        stage('Trivy') {
+            steps {
+                sh "trivy image -f json -o results.json my-apache2"
+                recordIssues(tools: [trivy(pattern: 'results.json')])
             }
         }
 
