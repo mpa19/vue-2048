@@ -13,19 +13,18 @@ pipeline{
             steps {
                 parallel(
                     a: {
-                        steps{
-                            sh "trivy image -f json -o resultsImage.json my-apache2"
-                            recordIssues(tools: [trivy(pattern: 'resultsImage.json')])
-                        }
+                        sh "trivy image -f json -o resultsImage.json my-apache2"
                     },
                     b: {
-                        steps {
-                            sh "trivy fs --security-checks vuln,secret,config -f json -o resultsFs.json ./"
-                            recordIssues(tools: [trivy(pattern: 'resultsFs.json')])
-                        }
-                        
+                        sh "trivy fs --security-checks vuln,secret,config -f json -o resultsFs.json ./"
                     }
                 )
+            }
+            post {
+                always {
+                    recordIssues(tools: [trivy(pattern: 'resultsImage.json')])
+                    recordIssues(tools: [trivy(pattern: 'resultsFs.json')])                        
+                }
             }
         }
 
