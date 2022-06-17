@@ -9,16 +9,16 @@ pipeline{
 
     stages {
 
-        stage('Build') {
+        stage('Trivy') {
             steps {
-                sh "docker-compose build"
+                sh "trivy fs --security-checks vuln,secret,config -f json -o results.json vue-2048/"
+                recordIssues(tools: [trivy(pattern: 'results.json')])
             }
         }
 
-        stage('Trivy') {
+        stage('Build') {
             steps {
-                sh "trivy image -f json -o results.json my-apache2"
-                recordIssues(tools: [trivy(pattern: 'results.json')])
+                sh "docker-compose build"
             }
         }
 
