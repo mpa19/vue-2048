@@ -32,7 +32,8 @@ pipeline{
 
         stage('Docker push') {
             steps {
-                withCredentials([string(credentialsId: 'docker', variable: '')]) {
+                withCredentials([string(credentialsId: 'docker', variable: 'token')]) {
+                    sh 'echo $token | docker login -u marcpz --password-stdin'
                     sh 'docker push marcpz/2048:latest'
                 }
             }
