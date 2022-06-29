@@ -30,6 +30,14 @@ pipeline{
             }
         }
 
+        stage('Docker push') {
+            steps {
+                withCredentials([string(credentialsId: 'docker hub')]) {
+                    sh 'docker push marcpz/2048:latest'
+                }
+            }
+        }
+
         stage('Publish'){
            steps {
                  sshagent(['github-shh']) {
