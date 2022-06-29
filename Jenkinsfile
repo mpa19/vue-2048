@@ -32,7 +32,7 @@ pipeline{
 
         stage('Docker push') {
             steps {
-                withCredentials([string(credentialsId: 'docker hub', variable: '')]) {
+                withCredentials([string(credentialsId: 'docker', variable: '')]) {
                     sh 'docker push marcpz/2048:latest'
                 }
             }
