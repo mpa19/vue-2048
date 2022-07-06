@@ -33,7 +33,7 @@ pipeline{
         stage('Deploy AWS EC2'){
             steps{
                 withAWS(credentials:'AWS-KEY',region:'eu-west-1') {
-                    withCredentials([sshUserPrivateKey(credentialsId: 'SSH-AWS', keyFileVariable: '')]) {
+                    sshagent(['SSH-AWS']) {
                         sh 'ansible-playbook -i ansible/inventory ansible/ec2-docker.yaml'
                     }
                 }
