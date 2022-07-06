@@ -39,3 +39,15 @@
       vars:
         ansible_user: ec2-user
       loop: "{{ ec2.instances }}"
+      
+- name: Configure instances
+  hosts: launched
+  become: true
+  gather_facts: true
+  vars:
+    ansible_user: ec2-user
+  tasks:
+    - name: Execute tasks
+      include_tasks: "{{ item }}"
+      loop: 
+        - ec2-docker.yaml

@@ -1,7 +1,7 @@
 ---
-- hosts: web
-  become: true
-  tasks:
+#- hosts: web
+#  become: true
+#  tasks:
     - name: Install docker
       yum: name=docker state=present update_cache=yes
 
@@ -29,5 +29,14 @@
         name: ec2-user
         groups: docker
 
+    - name: Symlink
+      file:
+        src: /usr/local/bin/docker-compose
+        dest: /usr/bin/docker-compose
+        state: link
+        owner: ec2-user
+        mode: '0755'
+
     - name: Deploy springrest docker compose
-      shell: /usr/local/bin/docker-compose up -d --no-build
+      become: true
+      shell: docker-compose up -d --no-build
