@@ -30,4 +30,4 @@
         groups: docker
 
     - name: Deploy springrest docker compose
-      shell: docker-compose up -d --no-build
+      shell: /usr/local/bin/docker-compose up -d --no-build
