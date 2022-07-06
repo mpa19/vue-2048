@@ -33,7 +33,7 @@ pipeline{
         stage('Deploy AWS EC2'){
             steps{
                 withAWS(credentials:'Administrator acces key') {
-                    sh 'ansible-playbook -i /ansible/inventory /ansible/ec2-docker.yaml'
+                    sh 'ansible-playbook -i ansible/inventory ansible/ec2-docker.yaml'
                 }
             }
         }
