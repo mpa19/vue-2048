@@ -26,8 +26,10 @@ pipeline{
 
         stage('Create instance AWS EC2'){
             steps{
-                sh 'terraform init'
-                sh 'terraform apply'
+                withAWS(credentials:'AWS-KEY',region:'eu-west-1') {
+                    sh 'terraform init'
+                    sh 'terraform apply'
+                }
             }
         }
 
