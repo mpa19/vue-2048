@@ -11,6 +11,7 @@ terraform {
 
 provider "aws" {
   region  = var.region_name
+  shared_credentials_file = "~.aws/credentials"
 }
 
 resource "aws_instance" "app_server" {
