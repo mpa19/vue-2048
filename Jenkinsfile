@@ -41,7 +41,7 @@ pipeline{
             steps{
                 withAWS(credentials:'AWS-KEY',region:'eu-west-1') {
                     sshagent(['SSH-AWS']) {
-                        sh 'ansible-playbook -i inventory ec2-provision.yml'
+                        sh 'ansible-playbook -i aws_ec2.yml ec2-provision.yml'
                     }
                 }
             }
