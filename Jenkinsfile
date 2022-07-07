@@ -24,6 +24,13 @@ pipeline{
             }
         }
 
+        stage('Create instance AWS EC2'){
+            steps{
+                sh 'terraform init'
+                sh 'terraform apply'
+            }
+        }
+
         stage('Build') {
             steps {
                 sh "docker-compose build"
@@ -34,7 +41,7 @@ pipeline{
             steps{
                 withAWS(credentials:'AWS-KEY',region:'eu-west-1') {
                     sshagent(['SSH-AWS']) {
-                        sh 'ansible-playbook -i inventory ec2-docker.yaml'
+                        sh 'ansible-playbook -i inventory ec2-provision.yml'
                     }
                 }
             }
