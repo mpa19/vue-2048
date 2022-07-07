@@ -27,9 +27,9 @@ pipeline{
         stage('Create instance AWS EC2'){
             steps{
                 withAWS(credentials:'AWS-KEY',region:'eu-west-1') {
-                    sh 'terraform init'
-                    sh 'terraform apply -auto-approve'
-                }
+                    sh '''cd terraform/
+                        terraform init
+                        terraform apply -auto-approve'''                }
             }
         }
 
@@ -43,7 +43,8 @@ pipeline{
             steps{
                 withAWS(credentials:'AWS-KEY',region:'eu-west-1') {
                     sshagent(['SSH-AWS']) {
-                        sh 'ansible-playbook -i aws_ec2.yml ec2-provision.yml'
+                        sh '''cd ansible/
+                            ansible-playbook -i aws_ec2.yml ec2-provision.yml'''
                     }
                 }
             }
