@@ -21,7 +21,7 @@
 
     - name: Copy docker-compose
       copy:
-        src: docker-compose.yml
+        src: ../docker-compose.yml
         dest: /home/ec2-user
 
     - name: Add user to docker
