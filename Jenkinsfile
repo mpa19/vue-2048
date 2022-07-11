@@ -24,7 +24,7 @@ pipeline{
             }
         }
 
-        stage('Create instance AWS EC2'){
+        /*stage('Create instance AWS EC2'){
             steps{
                 withAWS(credentials:'AWS-KEY',region:'eu-west-1') {
                     sh '''cd terraform/
@@ -46,6 +46,14 @@ pipeline{
                         sh '''cd ansible/
                             ansible-playbook -i aws_ec2.yml ec2-provision.yml'''
                     }
+                }
+            }
+        }*/
+
+        stage('Minikube apply') {
+            steps {
+                withKubeCredentials(kubectlCredentials: [[caCertificate: '/home/sinensia/.minikube/ca.crt', clusterName: 'minikube', contextName: '', credentialsId: 'kubectl', namespace: 'minikube', serverUrl: 'https://192.168.49.2:8443']]) {
+                    sh "kuberctl apply -f ./minikube/vue2048.yaml"
                 }
             }
         }
